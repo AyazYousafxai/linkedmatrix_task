@@ -13,26 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up python 3.6
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.6"
-      - name: Install dependencies
+      - name: Building containers
         run: |
-          python -m pip install --upgrade  pip
-          pip install -r requirements.txt
-      - name: Lint with flake8
+          docker-compose up -d --build
+      - name: Running Tests
         run: |
-          pip install flake8
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Coverage report
-        run: |
-          pip install coverage
-          coverage run manage.py test
-          coverage report
-      - name: Testing
-        run: |
-          python3 manage.py test
+          docker-compose exec -T api pytest
 
 
 
