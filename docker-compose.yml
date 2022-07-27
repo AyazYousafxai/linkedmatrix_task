@@ -1,0 +1,27 @@
+version: "3.9"
+   
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/matrix
+    ports:
+      - "8000:8000"
+    # depends_on:
+    #   - redis
+    environment:
+      - REDIS_HOST=redis
+  redis:
+    image: redis:4-alpine
+    restart: always
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf # feel free to omit this line if you want to stick with the default config
+      - "redis:/data"
+    ports:
+      - "6019:6379"
+    # command: redis-server /usr/local/etc/redis/redis.conf # also omit this line if you do not have a config file
+
+volumes:
+  redis: {}
+      
