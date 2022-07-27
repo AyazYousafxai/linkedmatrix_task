@@ -73,11 +73,14 @@ TEMPLATES = [
 REDIS_HOST = os.environ.get("REDIS_HOST", "127.0.0.1")
 REDIS_PORT = os.environ.get("REDIS_PORT", "6379")
 CACHE_TTL = 60 * 15
-
+if "localhost" in REDIS_HOST:
+    REDIS_HOST='redis://localhost:6379'
+else:
+    REDIS_HOST="redis://{}:{}/1".format(REDIS_HOST, REDIS_PORT),
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "{}/1".format(REDIS_HOST),
+        "LOCATION": REDIS_HOST,
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
         "KEY_PREFIX": "example",
     }

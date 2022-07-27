@@ -39,11 +39,6 @@ jobs:
         run: |
           pip install flake8
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Coverage report
-        run: |
-          pip install coverage
-          coverage run manage.py test
-          coverage report
       - name: Testing
         run: |
           python3 manage.py test
