@@ -1,4 +1,3 @@
-
 name: User Test
 
 on: 
@@ -13,12 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Building containers
+      - name: Building container
         run: |
           docker-compose up -d --build
       - name: Running Tests
         run: |
-          docker-compose exec -T api pytest
-
-
-
+          docker-compose exec -T api test
