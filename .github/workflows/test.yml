@@ -12,7 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      REDIS_HOST: redis
+      DJANGO_SECRET_KEY: django-insecure-u75rwv%03wxw!4k+y5hh1qoy0@qo8qo=!)dvkqb-9&#u5=-ne!
+      DJANGO_SETTINGS_MODULE: botweb.settings.test
+      REDIS_HOST: redis://localhost:6379
     services:
       redis:
         image: redis
