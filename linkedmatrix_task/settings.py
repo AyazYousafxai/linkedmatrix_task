@@ -72,7 +72,6 @@ TEMPLATES = [
 ]
 REDIS_HOST = os.environ.get("REDIS_HOST", "127.0.0.1")
 REDIS_PORT = os.environ.get("REDIS_PORT", "6379")
-
 CACHE_TTL = 60 * 15
 
 CACHES = {
@@ -83,6 +82,7 @@ CACHES = {
         "KEY_PREFIX": "example",
     }
 }
+print(CACHES)
 
 WSGI_APPLICATION = "linkedmatrix_task.wsgi.application"
 
